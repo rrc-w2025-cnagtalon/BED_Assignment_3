@@ -1,8 +1,9 @@
 import { Request, RequestHandler, Response } from "express";
 import { EventCreateRequest } from "../models/eventCreateRequestModel"
-import { createNewEvent, getEventByIdAsync, getAllEvents } from "../services/eventService"
+import { createNewEvent, getEventByIdAsync, getAllEvents, updateEventById } from "../services/eventService"
 import { HTTP_STATUS } from "../../../constants/httpConstants"
 import { successResponse } from "../models/responseModel"
+import { EventUpdateRequest } from "../models/eventUpdateRequestModel"
 
 //adding a new event
 export const createEvent = async (req: Request, res: Response) => {
@@ -43,4 +44,22 @@ export const getAllEvent = async (req: Request, res: Response) => {
     } catch (error) {
         res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({message: "Internal server error"});
     }  
+};
+
+export const updateEvent = async (req: Request, res: Response) => {
+    //id comes from the param
+    let id = req.params.id;
+
+    let request: EventUpdateRequest = {
+        name: req.body.name,
+        date: req.body.date,
+        capacity: req.body.capacity,
+        registrationCount: req.body.registrationCount,
+        status: req.body.status,
+        category: req.body.category
+    }
+
+    await updateEventById(id, request)
+
+    res.status(HTTP_STATUS.NO_CONTENT).send(`Entity ${id} was updated.`)
 };
