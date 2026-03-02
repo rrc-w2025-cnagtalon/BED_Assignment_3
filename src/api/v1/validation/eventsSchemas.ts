@@ -23,7 +23,7 @@ export const eventSchemas = {
 
             capacity: Joi.number()
                 .integer()
-                .min(1)
+                .min(5)
                 .required()
                 .messages({
                     "any.required": "Validation error: \"capacity\" is required",
