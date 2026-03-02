@@ -71,7 +71,7 @@ export const getCollection = async (): Promise<Array<EventDTO> | undefined> => {
         // `doc.data()` returns an object with all fields in the document
         let data = doc.data()
         events.push({
-            id: doc.id,
+            id: data!.id,
             name: data!.name,
             date: data!.date,
             capacity: data!.capacity,
@@ -95,14 +95,12 @@ export const updateDocument = async (id: string, event: EventUpdateRequest ): Pr
     // This will only change the specified fields, leaving others untouched
     await docRef.update({
         //if the field is there, it will update it. if its not there, it will add the field.
-        id: docRef.id,
         name: event.name,
         date: event.date,
         capacity: event.capacity,
         registrationCount: event.registrationCount,
         status: event.status,
         category: event.category,
-        createdAt: new Date(),
         updatedAt: new Date()
     });
 
