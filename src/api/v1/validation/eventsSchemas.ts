@@ -26,9 +26,10 @@ export const eventSchemas = {
                 .min(5)
                 .required()
                 .messages({
-                    "any.required": "Validation error: \"capacity\" is required",
                     "number.base": "Validation error: \"capacity\" must be a number",
-                    "number.min": "Validation error: \"capacity\" must be greater than or equal to 1"
+                    "number.integer": "Validation error: \"capacity\" must be an integer",
+                    "number.min": "Validation error: \"capacity\" must be greater than or equal to 5",
+                    "any.required": "Validation error: \"capacity\" is required"
                 }),
 
             registrationCount: Joi.number().integer().min(0).default(0),
