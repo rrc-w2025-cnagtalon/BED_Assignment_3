@@ -6,7 +6,7 @@ const app: Express = express();
 
 app.use(express.json());
 
-app.use("/api/v1/items", eventsRoutes);
+app.use("/api/v1/events", eventsRoutes);
 
 // Define a route
 app.get("/", (req, res) => {
