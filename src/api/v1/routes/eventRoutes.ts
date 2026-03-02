@@ -5,6 +5,6 @@ const eventsRoutes: Router = express.Router();
 
 eventsRoutes.post("/", createEvent);
 eventsRoutes.get("/:id", getEventById);
-eventsRoutes.get("/:id", getAllEvent);
+eventsRoutes.get("/", getAllEvent);
 
 export default eventsRoutes;
