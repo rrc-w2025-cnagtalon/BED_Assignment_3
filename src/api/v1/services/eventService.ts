@@ -1,7 +1,8 @@
-import { addDocument, getDocumentById, getCollection } from "../repositories/eventRepository"
+import { addDocument, getDocumentById, getCollection, updateDocument } from "../repositories/eventRepository"
 import { EventCreateRequest } from "../models/eventCreateRequestModel"
 import { EventResponse } from "../models/eventResponse"
 import { EventDTO } from "../models/eventDTO"
+import { EventUpdateRequest } from "../models/eventUpdateRequestModel"
 
 export const createNewEvent = async (event: EventCreateRequest): Promise<string> => {
     return await addDocument(event);
@@ -25,4 +26,9 @@ export const getEventByIdAsync = async (id: string): Promise<EventResponse> => {
 
 export const getAllEvents = async (): Promise<Array<EventDTO> | undefined> => {
     return await getCollection();
+};
+
+export const updateEventById = async (id: string, event: EventUpdateRequest): Promise<void> => {
+    await updateDocument(id, event);
+    return;
 };
