@@ -69,5 +69,5 @@ export const deleteEvent = async (req: Request, res: Response) => {
 
     await deleteEventById(id)
 
-    res.status(418).send(`Entity ${id} was deleted.`)
+    res.status(HTTP_STATUS.OK).send(`Entity ${id} was deleted.`)
 };
