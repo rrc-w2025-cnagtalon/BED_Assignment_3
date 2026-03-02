@@ -1,5 +1,5 @@
 import { db } from "../../../../config/firebaseConfig";
-import { DocumentReference } from "firebase-admin/firestore";
+import { DocumentReference, QuerySnapshot } from "firebase-admin/firestore";
 import { Event } from "../models/eventModel";
 import { EventCreateRequest } from "../models/eventCreateRequestModel"
 import { EventDTO } from "../models/eventDTO"
@@ -55,4 +55,32 @@ export const getDocumentById = async (id: string): Promise<Event | undefined> =>
     } else {
         console.log("No such document!");
     }
+};
+
+export const getCollection = async (): Promise<Array<EventDTO> | undefined> => {
+    // Retrieve all documents from the 'events' collection
+    // `get()` returns a QuerySnapshot containing all documents in the collection
+    const snapshot: QuerySnapshot = await db.collection("events").get();
+
+    const events: EventDTO[] = []
+
+    // Iterate through each document in the collection
+    snapshot.forEach((doc) => {
+        // `doc.id` is the document's unique identifier
+        // `doc.data()` returns an object with all fields in the document
+        let data = doc.data()
+        events.push({
+            id: doc.id,
+            name: data!.name,
+            date: data!.date,
+            capacity: data!.capacity,
+            registrationCount: data!.registrationCount,
+            status: data!.status,
+            category: data!.category,
+            createdAt: data!.createdAt,
+            updatedAt: data!.updatedAt
+        });
+    });
+
+    return events;
 };

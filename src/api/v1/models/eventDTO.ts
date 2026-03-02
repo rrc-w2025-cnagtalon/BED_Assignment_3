@@ -7,4 +7,5 @@ export interface EventDTO {
     status: string;
     category: string;
     updatedAt: Date;
+    createdAt: Date;
 }
