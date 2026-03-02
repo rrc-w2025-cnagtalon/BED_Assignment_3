@@ -32,7 +32,14 @@ export const eventSchemas = {
                     "any.required": "Validation error: \"capacity\" is required"
                 }),
 
-            registrationCount: Joi.number().integer().min(0).default(0),
+            registrationCount: Joi.number()
+                .integer()
+                .min(0)
+                .max(Joi.ref('capacity')) 
+                .default(0)
+                .messages({
+                    "number.max": "Validation error: \"registrationCount\" must be less than or equal to ref:capacity" 
+                }),
             status: Joi.string()
                 .valid('active', 'cancelled', 'completed')
                 .default('active')
