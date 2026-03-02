@@ -2,6 +2,7 @@ import { db } from "../../../../config/firebaseConfig";
 import { DocumentReference } from "firebase-admin/firestore";
 import { Event } from "../models/eventModel";
 import { EventCreateRequest } from "../models/eventCreateRequestModel"
+import { EventDTO } from "../models/eventDTO"
 
 export const addDocument = async (item: EventCreateRequest ): Promise<string> => {
     // Generate the custom ID format: evt_ followed by 6 digits
@@ -22,10 +23,36 @@ export const addDocument = async (item: EventCreateRequest ): Promise<string> =>
         category: item.category,
         createdAt: new Date(),
         updatedAt: new Date()
-
     }
 
     await docRef.set(eventEntity);
-    
     return docRef.id;
+};
+
+export const getDocumentById = async (id: string): Promise<Event | undefined> => {
+    // Create a reference to a specific document in the 'events' collection
+    const docRef: DocumentReference = db.collection("events").doc(id);
+
+    // Use the `get()` method to retrieve the document
+    const doc = await docRef.get();
+
+    // Check if the document exists
+    if (doc.exists) {
+        // `doc.data()` returns an object with all fields in the document
+        let data = doc.data();
+
+        return {
+            id: doc.id,
+            name: data!.name,
+            date: data!.date,
+            capacity: data!.capacity,
+            registrationCount: data!.registrationCount,
+            status: data!.status,
+            category: data!.category,
+            createdAt: data!.createdAt,
+            updatedAt: data!.updatedAt
+        }
+    } else {
+        console.log("No such document!");
+    }
 };
