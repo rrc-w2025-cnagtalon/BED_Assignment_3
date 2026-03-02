@@ -3,8 +3,9 @@ import { DocumentReference, QuerySnapshot } from "firebase-admin/firestore";
 import { Event } from "../models/eventModel";
 import { EventCreateRequest } from "../models/eventCreateRequestModel"
 import { EventDTO } from "../models/eventDTO"
+import { EventUpdateRequest } from "../models/eventUpdateRequestModel"
 
-export const addDocument = async (item: EventCreateRequest ): Promise<string> => {
+export const addDocument = async (event: EventCreateRequest ): Promise<string> => {
     // Generate the custom ID format: evt_ followed by 6 digits
     const customId = `evt_${Math.floor(100000 + Math.random() * 900000)}`;
     // Create a reference to a document in the 'users' collection with ID 'user1'
@@ -15,12 +16,12 @@ export const addDocument = async (item: EventCreateRequest ): Promise<string> =>
     // The data is passed as an object with fields and their values
     const eventEntity: Event = {
         id: customId,
-        name: item.name,
-        date: item.date,
-        capacity: item.capacity,
-        registrationCount: item.registrationCount,
-        status: item.status,
-        category: item.category,
+        name: event.name,
+        date: event.date,
+        capacity: event.capacity,
+        registrationCount: event.registrationCount,
+        status: event.status,
+        category: event.category,
         createdAt: new Date(),
         updatedAt: new Date()
     }
@@ -83,4 +84,27 @@ export const getCollection = async (): Promise<Array<EventDTO> | undefined> => {
     });
 
     return events;
+};
+
+//update always takes 2 params, teh id and the event. 
+export const updateDocument = async (id: string, event: EventUpdateRequest ): Promise<void> => {
+    // Create a reference to a specific document in the 'event' collection
+    const docRef: DocumentReference = db.collection("events").doc(id);
+
+    // Use the `update()` method to modify specific fields in the document
+    // This will only change the specified fields, leaving others untouched
+    await docRef.update({
+        //if the field is there, it will update it. if its not there, it will add the field.
+        id: docRef.id,
+        name: event.name,
+        date: event.date,
+        capacity: event.capacity,
+        registrationCount: event.registrationCount,
+        status: event.status,
+        category: event.category,
+        createdAt: new Date(),
+        updatedAt: new Date()
+    });
+
+    return;
 };
