@@ -5,10 +5,10 @@ import morgan from "morgan";
 // Initialize Express application
 const app: Express = express();
 
+app.use(express.json());
+
 // Use Morgan for HTTP request logging
 app.use(morgan("combined"));
-
-app.use(express.json());
 
 app.use("/api/v1/events", eventsRoutes);
 
