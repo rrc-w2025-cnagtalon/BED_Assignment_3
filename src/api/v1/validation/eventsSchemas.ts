@@ -38,7 +38,12 @@ export const eventSchemas = {
                 .default('active')
                 .messages({
                     "any.only": "Validation error: \"status\" must be one of [active, cancelled, completed]"}),
-            category: Joi.string().default("general")
+            category: Joi.string()
+                .valid('conference', 'workshop', 'meetup', 'seminar', 'general') 
+                .default('general')
+                .messages({
+                    "any.only": "Validation error: \"category\" must be one of [conference, workshop, meetup, seminar, general]"
+    })
         }),
     },
 
