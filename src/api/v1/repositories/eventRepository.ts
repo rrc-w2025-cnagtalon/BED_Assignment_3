@@ -108,3 +108,11 @@ export const updateDocument = async (id: string, event: EventUpdateRequest ): Pr
 
     return;
 };
+
+export const deleteDocument = async (id: string): Promise<void> => {
+    // Create a reference to a specific document in the 'events' collection
+    const docRef: DocumentReference = db.collection("events").doc(id);
+
+    // Use the `delete()` method to remove the document from Firestore
+    await docRef.delete();
+};
