@@ -33,7 +33,11 @@ export const eventSchemas = {
                 }),
 
             registrationCount: Joi.number().integer().min(0).default(0),
-            status: Joi.string().default("active"),
+            status: Joi.string()
+                .valid('active', 'cancelled', 'completed')
+                .default('active')
+                .messages({
+                    "any.only": "Validation error: \"status\" must be one of [active, cancelled, completed]"}),
             category: Joi.string().default("general")
         }),
     },
