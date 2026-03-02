@@ -1,4 +1,4 @@
-import { addDocument, getDocumentById, getCollection, updateDocument } from "../repositories/eventRepository"
+import { addDocument, getDocumentById, getCollection, updateDocument, deleteDocument } from "../repositories/eventRepository"
 import { EventCreateRequest } from "../models/eventCreateRequestModel"
 import { EventResponse } from "../models/eventResponse"
 import { EventDTO } from "../models/eventDTO"
@@ -32,3 +32,8 @@ export const updateEventById = async (id: string, event: EventUpdateRequest): Pr
     await updateDocument(id, event);
     return;
 };
+
+export const deleteEventById = async (id: string): Promise<void> => {
+    await deleteDocument(id);
+    return;
+}
