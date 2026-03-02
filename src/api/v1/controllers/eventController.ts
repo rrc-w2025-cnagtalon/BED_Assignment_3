@@ -1,6 +1,6 @@
 import { Request, RequestHandler, Response } from "express";
 import { EventCreateRequest } from "../models/eventCreateRequestModel"
-import { createNewEvent, getEventByIdAsync, getAllEvents, updateEventById } from "../services/eventService"
+import { createNewEvent, getEventByIdAsync, getAllEvents, updateEventById, deleteEventById } from "../services/eventService"
 import { HTTP_STATUS } from "../../../constants/httpConstants"
 import { successResponse } from "../models/responseModel"
 import { EventUpdateRequest } from "../models/eventUpdateRequestModel"
@@ -62,4 +62,12 @@ export const updateEvent = async (req: Request, res: Response) => {
     await updateEventById(id, request)
 
     res.status(HTTP_STATUS.NO_CONTENT).send(`Entity ${id} was updated.`)
+};
+
+export const deleteEvent = async (req: Request, res: Response) => {
+    let id = req.params.id;
+
+    await deleteEventById(id)
+
+    res.status(418).send(`Entity ${id} was deleted.`)
 };
