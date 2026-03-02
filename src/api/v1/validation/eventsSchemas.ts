@@ -5,7 +5,7 @@ export const eventSchemas = {
     // POST /posts - Create new post
     create: {
         body: Joi.object({
-            name: Joi.string().required(), 
+            name: Joi.string().min(3).max(100).required(),
             date: Joi.string().isoDate().required(),
             capacity: Joi.number().integer().min(1).required(),
             registrationCount: Joi.number().integer().min(0).required(),
