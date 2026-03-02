@@ -13,13 +13,15 @@ export const eventSchemas = {
                     "string.min": "Validation error: \"name\" length must be at least 3 characters long"
                 }),
             
-            date: Joi.string()
-                .isoDate()
+            date: Joi.date()
+                .iso()
+                .greater('now') 
                 .required()
                 .messages({
                     "any.required": "Validation error: \"date\" is required",
-                    "string.isoDate": "Validation error: \"date\" must be a valid date"
-                }),
+                    "string.isoDate": "Validation error: \"date\" must be a valid ISO 8601 date",
+                    "date.greater": "Validation error: \"date\" must be greater than \"now\"" 
+    }),
 
             capacity: Joi.number()
                 .integer()
