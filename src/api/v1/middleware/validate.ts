@@ -104,14 +104,14 @@ export const validateRequest = (
 
             // If there are any validation errors, return them
             if (errors.length > 0) {
-                res.status(HTTP_STATUS.NOT_FOUND).json({
+                res.status(HTTP_STATUS.BAD_REQUEST).json({
                     error: `Validation error: ${errors.join(", ")}`,
                 });
             }
 
             next();
         } catch (error: unknown) {
-            res.status(HTTP_STATUS.NOT_FOUND).json({
+            res.status(HTTP_STATUS.BAD_REQUEST).json({
                 error: (error as Error).message,
             });
         }
