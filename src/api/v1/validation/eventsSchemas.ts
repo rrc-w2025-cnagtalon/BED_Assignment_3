@@ -67,24 +67,27 @@ export const eventSchemas = {
         }),
     },
 
-    // // PUT /posts/:id - Update post
-    // update: {
-    //     params: Joi.object({
-    //         id: Joi.string().required().messages({
-    //             "any.required": "Post ID is required",
-    //             "string.empty": "Post ID cannot be empty",
-    //         }),
-    //     }),
-    //     body: Joi.object({
-    //         content: Joi.string().optional().messages({
-    //             "string.empty": "Content cannot be empty",
-    //         }),
-    //         userId: Joi.string().required().messages({ //must be a string, is required, and if it fails, this is the message you return.
-    //             "any.required": "User ID is required", //if its missing, retunr that its required
-    //             "string.empty": "User ID cannot be empty", // if its empty, this is rhe message
-    //         }),
-    //     }),
-    // },
+// PUT /api/v1/events/:id - Update event
+    update: {
+        params: Joi.object({
+            id: Joi.string().required().messages({
+                "any.required": "Validation error: \"id\" is required",
+                "string.empty": "Validation error: \"id\" cannot be empty",
+            }),
+        }),
+        body: Joi.object({
+            name: Joi.string().min(3).max(50).optional().messages({
+                "string.min": "Validation error: \"name\" length must be at least 3 characters long"
+            }),
+            date: Joi.date().iso().greater('now').optional().messages({
+                "date.greater": "Validation error: \"date\" must be greater than \"now\""
+            }),
+            capacity: Joi.number().integer().min(5).optional(),
+            registrationCount: Joi.number().integer().min(0).max(Joi.ref('capacity')).optional(),
+            status: Joi.string().valid('active', 'cancelled', 'completed').optional(),
+            category: Joi.string().valid('conference', 'workshop', 'meetup', 'seminar', 'general').optional()
+        }).min(1),
+    },
 
     // // DELETE /posts/:id - Delete post
     // delete: {
