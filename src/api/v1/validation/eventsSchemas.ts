@@ -67,7 +67,7 @@ export const eventSchemas = {
         }),
     },
 
-// PUT /api/v1/events/:id - Update event
+    // PUT /api/v1/events/:id - Update event
     update: {
         params: Joi.object({
             id: Joi.string().required().messages({
@@ -89,13 +89,13 @@ export const eventSchemas = {
         }).min(1),
     },
 
-    // // DELETE /posts/:id - Delete post
-    // delete: {
-    //     params: Joi.object({
-    //         id: Joi.string().required().messages({
-    //             "any.required": "Post ID is required",
-    //             "string.empty": "Post ID cannot be empty",
-    //         }),
-    //     }),
-    // },
+    // DELETE /api/v1/events/:id - Delete event
+    delete: {
+        params: Joi.object({
+            id: Joi.string().required().messages({
+                "any.required": "Validation error: \"id\" is required",
+                "string.empty": "Validation error: \"id\" cannot be empty",
+            }),
+        }),
+    },
 };

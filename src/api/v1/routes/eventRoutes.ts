@@ -9,6 +9,6 @@ eventsRoutes.post("/", validateRequest(eventSchemas.create), createEvent);
 eventsRoutes.get("/:id", validateRequest(eventSchemas.getById), getEventById);
 eventsRoutes.get("/", getAllEvent);
 eventsRoutes.put("/:id", validateRequest(eventSchemas.update), updateEvent);
-eventsRoutes.delete("/:id", deleteEvent)
+eventsRoutes.delete("/:id", validateRequest(eventSchemas.delete), deleteEvent);
 
 export default eventsRoutes;
