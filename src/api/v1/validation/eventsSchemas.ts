@@ -5,12 +5,12 @@ export const eventSchemas = {
     create: {
         body: Joi.object({
             name: Joi.string()
-                .min(3)
+                .min(5)
                 .required()
                 .messages({
                     "any.required": "Validation error: \"name\" is required",
                     "string.empty": "Validation error: \"name\" is required",
-                    "string.min": "Validation error: \"name\" length must be at least 3 characters long"
+                    "string.min": "Validation error: \"name\" length must be at least 5 characters long"
                 }),
             
             date: Joi.date()
@@ -21,7 +21,7 @@ export const eventSchemas = {
                     "any.required": "Validation error: \"date\" is required",
                     "string.isoDate": "Validation error: \"date\" must be a valid ISO 8601 date",
                     "date.greater": "Validation error: \"date\" must be greater than \"now\"" 
-    }),
+                }),
 
             capacity: Joi.number()
                 .integer()
@@ -52,22 +52,20 @@ export const eventSchemas = {
                 .default('general')
                 .messages({
                     "any.only": "Validation error: \"category\" must be one of [conference, workshop, meetup, seminar, general]"
-    })
+                })
         }),
     },
 
-    // // GET /posts/:id - Get single post
-    // getById: {
-    //     params: Joi.object({
-    //         id: Joi.string().required().messages({
-    //             "any.required": "Post ID is required",
-    //             "string.empty": "Post ID cannot be empty",
-    //         }),
-    //     }),
-    //     query: Joi.object({
-    //         include: Joi.string().valid("comments", "author").optional(), // this is query, we dont have any queries. so we can take this out. 
-    //     }),
-    // },
+    // GET /api/v1/events/:id - Get single event
+    getById: {
+        params: Joi.object({
+            id: Joi.string().required().messages({
+                "any.required": "Event ID is required",
+                "string.empty": "Event ID cannot be empty",
+                "string.min": "Event ID must be at least 10 characters"
+            }),
+        }),
+    },
 
     // // PUT /posts/:id - Update post
     // update: {

@@ -6,7 +6,7 @@ import { eventSchemas } from "../validation/eventsSchemas";
 const eventsRoutes: Router = express.Router();
 
 eventsRoutes.post("/", validateRequest(eventSchemas.create), createEvent);
-eventsRoutes.get("/:id", getEventById);
+eventsRoutes.get("/:id", validateRequest(eventSchemas.getById), getEventById);
 eventsRoutes.get("/", getAllEvent);
 eventsRoutes.put("/:id", updateEvent);
 eventsRoutes.delete("/:id", deleteEvent)
