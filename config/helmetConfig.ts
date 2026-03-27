@@ -1,7 +1,7 @@
 import helmet from "helmet";
 
 // Optimized configuration for JSON APIs
-const apiHelmetConfig = helmet({
+export const apiHelmetConfig = helmet({
     // Disable unnecessary middleware for API-only apps
     contentSecurityPolicy: false, // Not needed for JSON APIs
     crossOriginEmbedderPolicy: false,
