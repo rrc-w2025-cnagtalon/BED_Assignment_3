@@ -1,7 +1,16 @@
 import express, { Express } from "express";
+import eventsRoutes from "./api/v1/routes/eventRoutes";
+import morgan from "morgan";
 
 // Initialize Express application
 const app: Express = express();
+
+app.use(express.json());
+
+// Use Morgan for HTTP request logging
+app.use(morgan("combined"));
+
+app.use("/api/v1/events", eventsRoutes);
 
 // Define a route
 app.get("/", (req, res) => {
