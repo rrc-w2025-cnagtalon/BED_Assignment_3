@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
+import helmet from "helmet";
 
 // Load environment variables BEFORE your internal imports!
 dotenv.config();
@@ -10,6 +11,9 @@ import morgan from "morgan";
 
 // Initialize Express application
 const app: Express = express();
+
+// Apply basic Helmet security
+app.use(helmet());
 
 app.use(express.json());
 
