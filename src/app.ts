@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import { apiHelmetConfig } from "../config/helmetConfig";
+import { getCorsOptions } from "../config/corsConfig";
 
 // Load environment variables BEFORE your internal imports!
 dotenv.config();
@@ -14,7 +15,7 @@ import morgan from "morgan";
 // Initialize Express application
 const app: Express = express();
 app.use(apiHelmetConfig);
-app.use(cors());
+app.use(cors(getCorsOptions()));
 app.use(express.json());
 
 // Use Morgan for HTTP request logging
