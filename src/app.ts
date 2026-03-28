@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import { apiHelmetConfig } from "../config/helmetConfig";
@@ -13,7 +14,7 @@ import morgan from "morgan";
 // Initialize Express application
 const app: Express = express();
 app.use(apiHelmetConfig);
-
+app.use(cors());
 app.use(express.json());
 
 // Use Morgan for HTTP request logging
