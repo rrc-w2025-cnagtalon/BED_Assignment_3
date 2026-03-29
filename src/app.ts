@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import { apiHelmetConfig } from "../config/helmetConfig";
 import { getCorsOptions } from "../config/corsConfig";
+import setupSwagger from "../config/swagger";
 
 // Load environment variables BEFORE your internal imports!
 dotenv.config();
@@ -36,5 +37,7 @@ app.get("/api/v1/health", (req, res) => {
         version: "1.0.0",
     });
 });
+
+setupSwagger(app);
 
 export default app;
