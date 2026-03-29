@@ -20,33 +20,33 @@ This API is intended for developers building event frontends. It includes OpenAP
 
 1. **Clone the repository:**
 
-   ```
+   
    git clone https://github.com/rrc-w2025-cnagtalon/BED_Assignment_3.git
    cd BED_Assignment_3
-   ```
+   
 2. **Install dependencies:**
 
-   ```
+   
    npm install
-   ```
+   
 3. **Environment Setup:**
    Create a `.env` file in the root directory based on the following configuration:
 
-   ```
+   
    PORT=3000
    NODE_ENV=development
    ALLOWED_ORIGINS=http://localhost:3000
-   ```
+   
 4. **Start the Server:**
 
-   ```
+   
    # Start with ts-node for development
    npm start
 
    # Build and generate static documentation
    npm run build
    npm run generate-docs
-   ```
+   
 
 ---
 
@@ -56,13 +56,13 @@ This API is intended for developers building event frontends. It includes OpenAP
 
 **Request:**
 
-```bash
+
 # GET localhost:3000/api/v1/events
-```
+
 
 **Response (200 OK):**
 
-```json
+
 {
     "message": "Here are all the events.",
     "data": [
@@ -84,7 +84,7 @@ This API is intended for developers building event frontends. It includes OpenAP
             }
         }
 }
-```
+
 
 ---
 
@@ -92,7 +92,7 @@ This API is intended for developers building event frontends. It includes OpenAP
 
 **Request:**
 
-```
+
 # POST localhost:3000/api/v1/events
   -Header "Content-Type: application/json" \
   -body '{
@@ -100,16 +100,16 @@ This API is intended for developers building event frontends. It includes OpenAP
     "date": "2027-12-29T09:00:00.000Z",
     "capacity": 200
   }'
-```
+
 
 **Response (201 Created):**
 
-```
+
 {
     "message": "Event created",
     "data": "2DLNOox0NH9vF1cywKpM"
 }
-```
+
 
 ---
 
@@ -117,17 +117,17 @@ This API is intended for developers building event frontends. It includes OpenAP
 
 **Request:**
 
-```
+
 # PUT localhost:3000/api/v1/events/6HZTtuIBpp3dhrNRmjQd
   -Header "Content-Type: application/json" \
   -body '{
     "registrationCount": 100
   }'
-```
+
 
 **Response (200 OK):**
 
-```
+
 {
     "message": "Data retrieved.",
     "data": {
@@ -151,7 +151,7 @@ This API is intended for developers building event frontends. It includes OpenAP
         }
     }
 }
-```
+
 
 ---
 
@@ -159,18 +159,18 @@ This API is intended for developers building event frontends. It includes OpenAP
 
 **Request:**
 
-```
+
 # DELETE localhost:3000/api/v1/events/6HZTtuIBpp3dhrNRmjQd
 
-```
+
 
 **Response (200 OK):**
 
-```
+
 {
   "message": "Successful deletion of 6HZTtuIBpp3dhrNRmjQd"
 }
-```
+
 
 ---
 
