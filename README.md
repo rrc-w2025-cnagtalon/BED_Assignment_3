@@ -191,4 +191,3 @@ Response (200 OK):
 Public docs: [https://rrc-w2025-cnagtalon.github.io/BED_Assignment_3/](https://rrc-w2025-cnagtalon.github.io/BED_Assignment_3/)
 
 Local Swagger UI: `http://localhost:3000/api-docs`
-

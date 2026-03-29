@@ -1,19 +1,22 @@
-export const getCorsOptions = () => {
-    const isDevelopment = process.env.NODE_ENV === "development";
+import { CorsOptions } from "cors";
 
-    if (isDevelopment) {
-        // Allow all origins in development for easy testing
-        return {
-            origin: true,
-            credentials: true,
-        };
-    }
+export const publicCorsOptions: CorsOptions = {
+    origin: "*", 
+    methods: ["GET"]
+};
 
-    // Strict origins in production
-    return {
-        origin: process.env.ALLOWED_ORIGINS?.split(",") || [],
-        credentials: true,
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-    };
+export const authenticatedCorsOptions: CorsOptions = {
+    origin: (origin, callback) => {
+        const isDevelopment = process.env.NODE_ENV === "development";
+        const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
+
+        if (!origin || isDevelopment || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 };
